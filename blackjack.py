@@ -4,8 +4,6 @@ except ImportError: # python 2
     import Tkinter as tkinter
 import random
 
-mainWindow = tkinter.Tk()
-
 
 def load_images(card_images):
     suits = ['heart', 'club', 'diamond', 'spade']
@@ -31,7 +29,7 @@ def load_images(card_images):
 
 def deal_card(frame):
     # pop the next card off the top of the deck
-    next_card = deck.pop()
+    next_card = deck.pop(0)
     # add the image to a Label and dispaly the label
     tkinter.Label(frame, image=next_card[1], relief='raised').pack(side='left')
     # now return the card's face value
@@ -46,10 +44,12 @@ def deal_player():
     deal_card(player_card_frame)
 
 
-# Set up the screen and frames for the dealer nad player
-mainWindow.title("Blackjack")
-mainWindow.geometry("640x480")
+mainWindow = tkinter.Tk()
 
+# Set up the screen and frames for the dealer nad player
+mainWindow.title("Black Jack")
+mainWindow.geometry("640x480")
+mainWindow.configure(background='green')
 result_text = tkinter.StringVar
 result = tkinter.Label(mainWindow, textvariable=result_text)
 result.grid(row=0, column=0, columnspan=3)
