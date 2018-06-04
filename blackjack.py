@@ -66,5 +66,14 @@ player_button.grid(row=0, column=1)
 # load cards
 cards = []
 load_images(cards)
+print(cards)
+# Create a new deck of cards and shuffle them
+
+deck = list(cards)
+random.shuffle(deck)
+
+# Create the list to store the dealer's and player's hands
+dealer_hand = []
+player_hand = []
 
 mainWindow.mainloop()
