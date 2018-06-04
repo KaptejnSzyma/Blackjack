@@ -29,6 +29,15 @@ def load_images(card_images):
             card_images.append((10, image, ))
 
 
+def deal_card(frame):
+    # pop the next card off the top of the deck
+    next_card = deck.pop()
+    # add the image to a Label and dispaly the label
+    tkinter.Label(frame, image=next_card[1], relief='raised').pack(side='left')
+    # now return the card's face value
+    return next_card
+
+
 # Set up the screen and frames for the dealer nad player
 mainWindow.title("Blackjack")
 mainWindow.geometry("640x480")
