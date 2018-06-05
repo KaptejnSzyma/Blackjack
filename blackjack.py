@@ -57,6 +57,8 @@ def score_hand(hand):
 
 
 def deal_dealer():
+    global dealer_won
+    global player_won
     dealer_score = score_hand(dealer_hand)
     while 0 < dealer_score < 17:
         dealer_hand.append(deal_card(dealer_card_frame))
@@ -66,21 +68,30 @@ def deal_dealer():
     player_score = score_hand(player_hand)
     if player_score > 21:
         result_text.set("Dealer wins!")
+        dealer_won += 1
+        dealer_won_games.set(dealer_won)
     elif dealer_score > 21 or dealer_score < player_score:
         result_text.set("Player wins!")
+        player_won += 1
+        player_won_games.set(player_won)
     elif dealer_score > player_score:
         result_text.set("Dealer wins!")
+        dealer_won += 1
+        dealer_won_games.set(dealer_won)
     else:
         result_text.set("Draw!")
 
 
 def deal_player():
+    global dealer_won
     player_hand.append(deal_card(player_card_frame))
     player_score = score_hand(player_hand)
 
     player_score_label.set(player_score)
     if player_score > 21:
         result_text.set("Dealer wins!")
+        dealer_won += 1
+        dealer_won_games.set(dealer_won)
 
 
 def new_game():
@@ -120,7 +131,7 @@ mainWindow.title("Black Jack")
 mainWindow.geometry("640x480")
 mainWindow.configure(background='green')
 result_text = tkinter.StringVar()
-result = tkinter.Label(mainWindow, textvariable=result_text)
+result = tkinter.Label(mainWindow, textvariable=result_text, background='green', fg='white')
 result.grid(row=0, column=0, columnspan=3)
 
 card_frame = tkinter.Frame(mainWindow, relief='sunken', borderwidth=1, background='green')
@@ -134,8 +145,6 @@ dealer_card_frame = tkinter.Frame(card_frame, background='green')
 dealer_card_frame.grid(row=0, column=1, sticky='ew', rowspan=2)
 
 player_score_label = tkinter.IntVar()
-
-
 tkinter.Label(card_frame, text='Player', background='green', fg='white').grid(row=2, column=0)
 tkinter.Label(card_frame, textvariable=player_score_label, background='green', fg='white').grid(row=3, column=0)
 # embedded frame to hold the card images
@@ -157,10 +166,20 @@ new_game_button.grid(row=0, column=2)
 shuffle_button = tkinter.Button(button_frame, text="Shuffle", command=shuffle)
 shuffle_button.grid(row=0, column=3)
 
+won_games_frame = tkinter.Frame(mainWindow, background='green')
+won_games_frame.grid(row=4, column=0, rowspan=2, sticky='w')
+tkinter.Label(won_games_frame, text="Dealer's wins: ", background='green', fg='white').grid(row=0, column=0)
+tkinter.Label(won_games_frame, text="Player's wins: ", background='green', fg='white').grid(row=1, column=0)
+dealer_won = 0
+player_won = 0
+dealer_won_games = tkinter.IntVar()
+player_won_games = tkinter.IntVar()
+tkinter.Label(won_games_frame, textvariable=dealer_won_games, background='green', fg='white').grid(row=0, column=1)
+tkinter.Label(won_games_frame, textvariable=player_won_games, background='green', fg='white').grid(row=1, column=1)
+
 # load cards
 cards = []
 load_images(cards)
-print(cards)
 # Create a new deck of cards and shuffle them
 
 deck = list(cards)
