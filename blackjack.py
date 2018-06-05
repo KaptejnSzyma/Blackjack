@@ -1,6 +1,6 @@
 try:
     import tkinter
-except ImportError: # python 2
+except ImportError:  # python 2
     import Tkinter as tkinter
 import random
 
@@ -52,6 +52,8 @@ def deal_player():
     player_score_label.set(player_score)
     if player_score > 21:
         result_text.set("Dealer wins!")
+    print(locals())
+
 
 mainWindow = tkinter.Tk()
 
@@ -59,7 +61,7 @@ mainWindow = tkinter.Tk()
 mainWindow.title("Black Jack")
 mainWindow.geometry("640x480")
 mainWindow.configure(background='green')
-result_text = tkinter.StringVar
+result_text = tkinter.StringVar()
 result = tkinter.Label(mainWindow, textvariable=result_text)
 result.grid(row=0, column=0, columnspan=3)
 
