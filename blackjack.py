@@ -81,7 +81,6 @@ def deal_dealer():
         button_config()
         dealer_won += 1
         dealer_won_games.set(dealer_won)
-
     else:
         result_text.set("Draw!")
 
@@ -142,8 +141,9 @@ mainWindow = tkinter.Tk()
 
 # Set up the screen and frames for the dealer nad player
 mainWindow.title("Black Jack")
-mainWindow.geometry("640x480")
+mainWindow.geometry("600x320")
 mainWindow.configure(background='green')
+mainWindow.resizable(False, False)
 result_text = tkinter.StringVar()
 result = tkinter.Label(mainWindow, textvariable=result_text, background='green', fg='white')
 result.grid(row=0, column=0, columnspan=3)
@@ -184,11 +184,13 @@ won_games_frame = tkinter.Frame(mainWindow, background='green')
 won_games_frame.grid(row=4, column=0, rowspan=2, sticky='w')
 tkinter.Label(won_games_frame, text="Dealer's wins: ", background='green', fg='white').grid(row=0, column=0)
 tkinter.Label(won_games_frame, text="Player's wins: ", background='green', fg='white').grid(row=1, column=0)
+
 dealer_won = 0
-player_won = 0
 dealer_won_games = tkinter.IntVar()
-player_won_games = tkinter.IntVar()
 tkinter.Label(won_games_frame, textvariable=dealer_won_games, background='green', fg='white').grid(row=0, column=1)
+
+player_won = 0
+player_won_games = tkinter.IntVar()
 tkinter.Label(won_games_frame, textvariable=player_won_games, background='green', fg='white').grid(row=1, column=1)
 
 # load cards
@@ -204,5 +206,4 @@ dealer_hand = []
 player_hand = []
 
 new_game()
-
 mainWindow.mainloop()
