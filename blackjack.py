@@ -41,9 +41,11 @@ def deal_dealer():
 
 
 def deal_player():
-    player_score = 0
+    global player_score
+    global player_ace
     card_value = deal_card(player_card_frame)[0]
     if card_value == 1 and not player_ace:
+        player_ace = True
         card_value = 11
     player_score += card_value
     # if we would bust, check if there is an ace and subtract
