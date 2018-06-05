@@ -68,16 +68,20 @@ def deal_dealer():
     player_score = score_hand(player_hand)
     if player_score > 21:
         result_text.set("Dealer wins!")
+        button_config()
         dealer_won += 1
         dealer_won_games.set(dealer_won)
     elif dealer_score > 21 or dealer_score < player_score:
         result_text.set("Player wins!")
+        button_config()
         player_won += 1
         player_won_games.set(player_won)
     elif dealer_score > player_score:
         result_text.set("Dealer wins!")
+        button_config()
         dealer_won += 1
         dealer_won_games.set(dealer_won)
+
     else:
         result_text.set("Draw!")
 
@@ -90,8 +94,15 @@ def deal_player():
     player_score_label.set(player_score)
     if player_score > 21:
         result_text.set("Dealer wins!")
+        button_config()
         dealer_won += 1
         dealer_won_games.set(dealer_won)
+
+
+def button_config():
+    player_button.config(state='disabled')
+    dealer_button.config(state='disabled')
+    new_game_button.config(state='active')
 
 
 def new_game():
@@ -99,6 +110,9 @@ def new_game():
     global player_card_frame
     global dealer_hand
     global player_hand
+    player_button.config(state='active')
+    dealer_button.config(state='active')
+    new_game_button.config(state='disabled')
     # embedded frame to hold the card images
     dealer_card_frame.destroy()
     dealer_card_frame = tkinter.Frame(card_frame, background='green')
