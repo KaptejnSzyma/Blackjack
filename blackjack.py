@@ -150,6 +150,7 @@ player_hand = []
 
 deal_player()
 dealer_hand.append(deal_card(dealer_card_frame))
+dealer_score_label.set(score_hand((dealer_hand)))
 deal_player()
 
 mainWindow.mainloop()
