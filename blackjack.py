@@ -83,6 +83,7 @@ def deal_dealer():
         dealer_won_games.set(dealer_won)
     else:
         result_text.set("Draw!")
+        button_config()
 
 
 def deal_player():
